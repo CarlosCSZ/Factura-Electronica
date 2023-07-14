@@ -1,0 +1,36 @@
+<div class="main-body">
+  <div class="barra-busqueda">
+    <input
+      type="text"
+      id="panelBusqueda"
+      [(ngModel)]="busqueda"
+      placeholder="busca un producto"
+    />
+    <button class="busqueda" (click)="presentarProd()">
+      <img src="./assets/img/busqueda.webp" alt="busqueda" />
+    </button>
+    <span class="carrito">
+      <img src="./assets/img/logo.webp" alt="carrito">{{number}}
+    </span>
+  </div>
+  <div class="panel-info">
+    <div class="producto">
+      <div *ngIf="item.img; else default">
+        <img [src]="item.img" alt="producto" />
+      </div>
+      <ng-template #default>
+        <img src="./assets/img/noItems.webp" alt="notFound" />
+      </ng-template>
+    </div>
+    <div class="info">
+      <div>
+        <h2>{{ item.name }}</h2>
+        <h3>{{ item.price | currency : "$" }}</h3>
+        <p>{{ item.description }}</p>
+      </div>
+      <div class="agregar">
+        <button (click)="agregarProd()">Agregar Producto</button>
+      </div>
+    </div>
+  </div>
+</div>
