@@ -1,0 +1,53 @@
+<div class="retorno-home">
+  <a routerLink="/home">{{"<<< Seguir comprando"}}</a>
+</div>
+<div class="grid factura-list">
+  <h4>Facturar a:</h4>
+  <div class="grid cabecera">
+    <div class="grid titulos">
+      <p>Nombre: </p>
+      <p>Identificacion: </p>
+      <p>Celular: </p>
+      <p>Ubicacion: </p>
+    </div>
+    <div class="grid inputs">
+      <input type="text">
+      <input type="text">
+      <input type="text">
+      <input type="text">
+    </div>
+  </div>
+
+  <table class="table table-striped">
+    <thead class="table-head">
+      <tr>
+        <th id="check">check</th>
+        <th id="negrita">Product</th>
+        <th id="negrita">Quantity</th>
+        <th id="negrita">Price</th>
+        <th id="negrita">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of productos; index as i">
+        <th id="check">
+          <button (click)="rmProduct(i)">
+            <img [src]="closebtn">
+          </button>
+        </th>
+        <th>{{producto.name}}</th>
+        <th>{{cantidad}}</th>
+        <th>{{producto.price | currency : "$" }}</th>
+        <th>{{cantidad * producto.price | currency : "$" }}</th>
+      </tr>
+    </tbody>
+    <tfoot>
+      <th id="negrita">Total</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>{{total | currency : "$" }}</th>
+
+    </tfoot>
+  </table>
+</div>

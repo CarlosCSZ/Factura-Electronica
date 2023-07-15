@@ -17,7 +17,7 @@ export class BodyComponent {
     img: '',
     description:
       'No hay descripcion No hay descripcion',
-    price: '00',
+    price: 0,
   };
   compras: Producto[] = []
   number = 0;
@@ -40,7 +40,7 @@ export class BodyComponent {
       this.item.name = 'No hay Producto';
       this.item.img = '',
       this.item.description = 'No hay descripcion';
-      this.item.price = 'oo';
+      this.item.price = 0;
     }
   }
 

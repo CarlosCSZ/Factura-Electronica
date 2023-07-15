@@ -27,6 +27,12 @@ export class StoreService {
   }
 
   getTotal() {
-    return this.myShoppingCart.reduce((sum, item) => sum + parseInt(item.price), 0);
+    return this.myShoppingCart.reduce((sum, item) => sum + item.price, 0);
+  }
+
+  rmProduct(i: number): Producto[] {
+    this._myShoppingCart.splice(i, 1);
+    this.myCart.next(this.myShoppingCart);
+    return this._myShoppingCart;
   }
 }

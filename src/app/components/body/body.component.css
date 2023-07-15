@@ -31,6 +31,9 @@
   font-weight: 700;
   color: green;
 }
+.carrito a {
+  text-decoration: none;
+}
 .carrito img {
   border-radius: 50%;
   width: 40px;
@@ -68,6 +71,7 @@
   padding: 5%;
   border: 1px solid gray;
   font-family: 'Franklin Gothic Medium', Arial, sans-serif;
+  overflow-y: hidden;
 }
 .info h2 {
   margin-bottom: 15px;
