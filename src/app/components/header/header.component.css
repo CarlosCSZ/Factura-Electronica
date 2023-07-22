@@ -6,15 +6,16 @@ header {
 }
 .section-logo {
   height: auto;
-  margin: 10px 0 0 35px;
+  margin: 5px 0 5px 35px;
 }
 .section-logo img {
-  width: 50px;
+  width: 40px;
 }
 .title {
   text-align: center;
   flex-grow: 1;
 }
 .title h3 {
-  margin: 20px 50px 0 0;
+  font-weight: 700;
+  margin: 15px 60px 0 0;
 }

@@ -18,21 +18,28 @@ export class StoreService {
   }
 
   addProduct(product: Producto) {
+    console.log('store service: ', this.myShoppingCart.length, this.myShoppingCart);
     this._myShoppingCart.push(product);
     this.myCart.next(this.myShoppingCart);
+    console.log('store service end: ', this.myShoppingCart.length, this.myShoppingCart);
   }
 
-  getShoppingCart() {
-    return this._myShoppingCart;
-  }
+  // getShoppingCart() {
+  //   return this._myShoppingCart;
+  // }
 
   getTotal() {
-    return this.myShoppingCart.reduce((sum, item) => sum + item.price, 0);
+    return this.myShoppingCart.reduce((sum, item) => sum + (item.total * item.cantidad), 0);
   }
 
   rmProduct(i: number): Producto[] {
     this._myShoppingCart.splice(i, 1);
     this.myCart.next(this.myShoppingCart);
     return this._myShoppingCart;
+  }
+
+  updateProducts(productList: Producto[]) {
+    this._myShoppingCart = productList;
+    this.myCart.next(this.myShoppingCart);
   }
 }

@@ -1,53 +1,82 @@
 <div class="retorno-home">
-  <a routerLink="/home">{{"<<< Seguir comprando"}}</a>
+  <a routerLink="/home">{{ "<<< Seguir comprando" }}</a>
 </div>
-<div class="grid factura-list">
+
+<main class="factura-list">
   <h4>Facturar a:</h4>
-  <div class="grid cabecera">
-    <div class="grid titulos">
-      <p>Nombre: </p>
-      <p>Identificacion: </p>
-      <p>Celular: </p>
-      <p>Ubicacion: </p>
+  <form class="grid-container">
+    <div class="grid-container cabecera">
+      <div class="grid-container titulos">
+        <label for="nombre">Nombre:</label>
+        <label for="identificacion">Identificación:</label>
+        <label for="celular">Celular:</label>
+        <label for="ubicacion">Ubicación:</label>
+      </div>
+      <div class="grid-container inputs">
+        <input type="text" id="nombre" />
+        <input type="text" id="identificacion" />
+        <input type="text" id="celular" />
+        <input type="text" id="ubicacion" />
+      </div>
     </div>
-    <div class="grid inputs">
-      <input type="text">
-      <input type="text">
-      <input type="text">
-      <input type="text">
+
+    <table class="table table-striped">
+      <thead class="table-head">
+        <tr>
+          <th id="check">check</th>
+          <th class="producto" id="negrita">Producto</th>
+          <th class="cantidad" id="negrita">Cantidad</th>
+          <th id="negrita">Precio</th>
+          <th id="negrita">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of productos; index as i">
+          <td id="check">
+            <button class="remove-btn" (click)="rmProduct(i)">
+              <img [src]="closebtn" alt="Eliminar" />
+            </button>
+          </td>
+          <td class="producto">{{ producto.nombre }}</td>
+          <td class="cantidad">
+            <input
+              type="number"
+              [(ngModel)]="producto.cantidad"
+              name="cantidad"
+              (ngModelChange)="actualizarTotal()"
+            />
+          </td>
+          <td>{{ producto.precio | currency : "$" }}</td>
+          <td>{{ producto.cantidad * producto.total | currency : "$" }}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="4" id="negrita">Total</th>
+          <th>{{ total | currency : "$" }}</th>
+        </tr>
+      </tfoot>
+    </table>
+
+    <button class="comprar-btn" (click)="comprarProducto()">Comprar</button>
+  </form>
+</main>
+
+<ng-template #successModal class="modal-main" let-modal>
+  <!-- <div class="modal-backdrop"></div> -->
+  <div class="modal-header">
+    <h4 class="modal-title">¡Compra exitosa!</h4>
+    <button type="button" class="btn close" aria-label="Close" (click)="cerrarModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body custom-modal-content">
+    <div class="custom-modal-body">
+      <img src="./assets/svg/success.svg" alt="Success">
     </div>
   </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="cerrarModal()">Aceptar</button>
+  </div>
+</ng-template>
 
-  <table class="table table-striped">
-    <thead class="table-head">
-      <tr>
-        <th id="check">check</th>
-        <th id="negrita">Product</th>
-        <th id="negrita">Quantity</th>
-        <th id="negrita">Price</th>
-        <th id="negrita">Total</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let producto of productos; index as i">
-        <th id="check">
-          <button (click)="rmProduct(i)">
-            <img [src]="closebtn">
-          </button>
-        </th>
-        <th>{{producto.name}}</th>
-        <th>{{cantidad}}</th>
-        <th>{{producto.price | currency : "$" }}</th>
-        <th>{{cantidad * producto.price | currency : "$" }}</th>
-      </tr>
-    </tbody>
-    <tfoot>
-      <th id="negrita">Total</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th>{{total | currency : "$" }}</th>
-
-    </tfoot>
-  </table>
-</div>

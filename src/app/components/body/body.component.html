@@ -4,16 +4,34 @@
       type="text"
       id="panelBusqueda"
       [(ngModel)]="busqueda"
+      (ngModelChange)="filtrarProducto()"
       placeholder="busca un producto"
+      list="filtradosLista"
     />
+    <datalist id="filtradosLista">
+      <option *ngFor="let nombre of filtrados" [value]="nombre">
+      </option>
+    </datalist>
+    <!-- <select
+      id="panelBusqueda"
+      [(ngModel)]="busqueda"
+    >
+      <option value="">Selecciona un producto</option>
+      <option *ngFor="let producto of productos" [value]="producto">
+        {{ producto.nombre }}
+      </option>
+    </select> -->
     <button class="busqueda" (click)="presentarProd()">
       <img src="./assets/img/busqueda.webp" alt="busqueda" />
     </button>
+    <button class="busqueda" (click)="agregarNuevoProd()">
+      <img src="./assets/svg/plus.svg" alt="busqueda" />
+    </button>
     <div class="carrito">
       <a routerLink="/facturar">
-        <img src="./assets/img/logo.webp" alt="carrito">
+        <img src="./assets/img/logo.webp" alt="carrito" />
       </a>
-      <span>{{number}}</span>
+      <span>{{ number }}</span>
     </div>
   </div>
   <div class="panel-info">
@@ -27,12 +45,17 @@
     </div>
     <div class="info">
       <div>
-        <h2>{{ item.name }}</h2>
-        <h3>{{ item.price | currency : "$" }}</h3>
-        <p>{{ item.description }}</p>
+        <h2>{{ item.nombre }}</h2>
+        <h3>{{ item.precio | currency : "$" }}</h3>
+        <div class="iva-condition" *ngIf="item.iva > 0">
+          <p>+</p>
+          <h3>{{ item.iva/100 | percent }}</h3>
+          <p class="total">=<span>{{item.total | currency: "$"}}</span></p>
+        </div>
+        <p>{{ item.descripcion }}</p>
       </div>
       <div class="agregar">
-        <button (click)="agregarProd()">Agregar Producto</button>
+        <button (click)="agregarProdCarrito()">Agregar Producto</button>
       </div>
     </div>
   </div>

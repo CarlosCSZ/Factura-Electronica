@@ -1,8 +1,8 @@
 .main-body {
-  width: 70%;
+  width: 80%;
   display: flex;
   flex-direction: column;
-  padding: 5% 10%;
+  padding: 5% 8%;
   margin: 0 auto;
   justify-content: center;
   align-items: center;
@@ -12,20 +12,20 @@
   flex-direction: row;
   margin-bottom: 20px;
   margin-left: 80px;
-  width: 80%;
+  width: 90%;
   height: 30px;
 }
 #panelBusqueda {
   background-color: rgb(225, 232, 245);
   float: right;
-  padding: 10px;
+  padding: 8px;
   font-size: 1.4rem;
   font-weight: 600;
   width: 60%;
 }
 .carrito {
   display: inline-block;
-  left: 290px;
+  left: calc(35% - 100px);
   position: relative;
   font-size: 1.2rem;
   font-weight: 700;
@@ -41,6 +41,8 @@
 .busqueda {
   margin-left: 15px;
   cursor: pointer;
+  border: 1px solid rgb(41, 67, 66);
+  border-radius: 30%;
 }
 .busqueda img {
   width: 20px;
@@ -50,10 +52,10 @@
 .panel-info {
   display: grid;
   grid-template-columns: 3fr 2fr;
-  grid-gap: 10px;
-  border: 2px solid grey;
+  grid-gap: 5px;
+  border: 1px solid grey;
   width: 100%;
-  height: 400px;
+  height: 380px;
   justify-content: center;
 }
 .producto {
@@ -80,6 +82,7 @@
 }
 .info h3 {
   font-size: 1.6em;
+  font-weight: 600;
   margin-bottom: 5px;
 }
 .info p {
@@ -88,11 +91,28 @@
   margin-bottom: 15px;
   text-align: justify;
 }
+.iva-condition {
+  display: flex;
+  flex-direction: row;
+  font-size: 0.8rem;
+}
+.iva-condition h3 {
+  margin-top: 3px;
+}
+.total {
+  font-size: 1.4rem;
+  margin: -2px 0 0 5px;
+}
+.total span {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 3px 0 0 5px;
+}
 .agregar {
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  margin-top: 20%;
+  margin-top: 15%;
 }
 .agregar button {
   background-color: antiquewhite;
