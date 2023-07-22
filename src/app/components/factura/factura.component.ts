@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+
 import { Producto } from 'src/app/models/product.model';
 import { StoreService } from 'src/app/services/store.service';
 
@@ -12,17 +12,15 @@ export class FacturaComponent implements OnInit{
   productos: Producto[] = [];
   total = 0;
   closebtn = "./assets/svg/close.svg";
+  showSuccessModal = false;
 
-  modalRef: NgbModalRef | undefined;
-  @ViewChild('successModal') successModal: any;
+  @ViewChild('modalContainer', { read: ViewContainerRef }) successModal!: ViewContainerRef;
 
   constructor(
     private storeService: StoreService,
-    private modalService: NgbModal,
   ) {}
 
   ngOnInit(): void {
-    console.log('Carrito on inti: ', this.storeService.myShoppingCart.length, this.storeService.myShoppingCart)
     this.storeService.myCart$.subscribe((compras) => {
       this.productos = compras;
       this.total = this.storeService.getTotal();
@@ -35,19 +33,11 @@ export class FacturaComponent implements OnInit{
   }
 
   comprarProducto() {
-    this.modalRef = this.modalService.open(this.successModal,
-      {
-        centered: true,
-        size: 'sm',
-        backdropClass: 'none'
-      }
-    )
+    this.showSuccessModal = true;
   }
 
   cerrarModal() {
-    if (this.modalRef) {
-      this.modalRef.dismiss();
-    }
+    this.showSuccessModal = false;
   }
 
   actualizarTotal() {

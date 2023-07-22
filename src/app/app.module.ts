@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { BodyComponent } from './components/body/body.component';
 import { FacturaComponent } from './components/factura/factura.component';
+import { SuccessModalComponent } from './components/success-modal/success-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     BodyComponent,
-    FacturaComponent
+    FacturaComponent,
+    SuccessModalComponent
   ],
   imports: [
     BrowserModule,
