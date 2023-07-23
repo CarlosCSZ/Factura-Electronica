@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+@import 'ngx-toastr/toastr';
 
 * {
   font-family: 'Quicksand', sans-serif;
@@ -10,4 +11,10 @@
 html {
   font-size: 62.5%;
   background-color: aliceblue;
+}
+
+.toast-container .ngx-toastr {
+  top: 150px;
+  right: 160px;
+  font-size: 1.4rem;
 }

@@ -36,7 +36,7 @@ export class ApiService {
           return throwError( () => new Error('No estas permitido'));
         }
         if (error.status === HttpStatusCode.Forbidden) {
-          return throwError( () => new Error('Campos del modelo invalidos'));
+          return throwError( () => new Error('Campo de identificacion Vacio'));
         }
         return throwError( () => new Error('Ups algo salio mal'));
       })

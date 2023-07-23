@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { Cliente } from 'src/app/models/cliente.model';
+import { ToastrService } from 'ngx-toastr';
 
+import { Cliente } from 'src/app/models/cliente.model';
 import { Producto } from 'src/app/models/product.model';
 import { ApiService } from 'src/app/services/api.service';
 import { StoreService } from 'src/app/services/store.service';
@@ -28,6 +29,7 @@ export class FacturaComponent implements OnInit{
   constructor(
     private storeService: StoreService,
     private apiService: ApiService,
+    private mensaje: ToastrService,
   ) {}
 
   ngOnInit(): void {
@@ -63,9 +65,17 @@ export class FacturaComponent implements OnInit{
       this.cliente.cedula = data.clientes[0].cedula;
       this.cliente.celular = data.clientes[0].celular;
       this.cliente.direccion = data.clientes[0].direccion;
+      this.mensaje.success('Cliente registrado');
     },
     (error) => {
-      alert(`${error.message.toUpperCase()}`)
+      this.mensaje.error(`${error.message.toUpperCase()}`);
+      this.cliente = {
+        id: 0,
+        nombre: '',
+        cedula: '',
+        celular: '',
+        direccion: ''
+      };
     });
   }
 }
