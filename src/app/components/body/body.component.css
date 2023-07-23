@@ -23,6 +23,9 @@
   font-weight: 600;
   width: 60%;
 }
+#filtradosLista {
+  width: 90%;
+}
 .carrito {
   display: inline-block;
   left: calc(35% - 100px);

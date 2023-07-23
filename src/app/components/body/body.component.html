@@ -12,15 +12,7 @@
       <option *ngFor="let nombre of filtrados" [value]="nombre">
       </option>
     </datalist>
-    <!-- <select
-      id="panelBusqueda"
-      [(ngModel)]="busqueda"
-    >
-      <option value="">Selecciona un producto</option>
-      <option *ngFor="let producto of productos" [value]="producto">
-        {{ producto.nombre }}
-      </option>
-    </select> -->
+
     <button class="busqueda" (click)="presentarProd()">
       <img src="./assets/img/busqueda.webp" alt="busqueda" />
     </button>

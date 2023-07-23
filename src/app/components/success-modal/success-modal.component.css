@@ -2,10 +2,10 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 1000vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.6);
-  opacity: 90%;
+  opacity: 100%;
   z-index: 0;
   transition: opacity 0.5s ease;
 }
@@ -27,6 +27,8 @@
 .modal-header button {
   border-radius: 5%;
   margin-right: 5px;
+  font-size: 2.2rem;
+  font-weight: 700;
 }
 .modal-content {
   display: flex;
@@ -36,7 +38,7 @@
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
   padding: 1rem;
-  background-color: #6494a4;
+  background-color: #578696;
   width: 400px;
   max-height: 200px;
   text-align: center;

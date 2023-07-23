@@ -13,106 +13,79 @@
         <label for="ubicacion">Ubicación:</label>
       </div>
       <div class="grid-container inputs">
-        <input type="text" id="nombre" />
-        <input type="text" id="identificacion" />
-        <input type="text" id="celular" />
-        <input type="text" id="ubicacion" />
+        <input
+          type="text"
+          id="nombre"
+          name="nombre"
+          [(ngModel)]="cliente.nombre"
+        />
+        <input
+          type="text"
+          id="identificacion"
+          name="identificacion"
+          [(ngModel)]="cliente.cedula"
+        />
+        <input
+          type="text"
+          id="celular"
+          name="celular"
+          [(ngModel)]="cliente.celular"
+        />
+        <input
+          type="text"
+          id="ubicacion"
+          name="ubicacion"
+          [(ngModel)]="cliente.direccion"
+        />
       </div>
     </div>
-
-    <table class="table table-striped">
-      <thead class="table-head">
-        <tr>
-          <th id="check">check</th>
-          <th class="producto" id="negrita">Producto</th>
-          <th class="cantidad" id="negrita">Cantidad</th>
-          <th id="negrita">Precio</th>
-          <th id="negrita">Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let producto of productos; index as i">
-          <td id="check">
-            <button class="remove-btn" (click)="rmProduct(i)">
-              <img [src]="closebtn" alt="Eliminar" />
-            </button>
-          </td>
-          <td class="producto">{{ producto.nombre }}</td>
-          <td class="cantidad">
-            <input
-              type="number"
-              [(ngModel)]="producto.cantidad"
-              name="cantidad"
-              (ngModelChange)="actualizarTotal()"
-            />
-          </td>
-          <td>{{ producto.precio | currency : "$" }}</td>
-          <td>{{ producto.cantidad * producto.total | currency : "$" }}</td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <th colspan="4" id="negrita">Total</th>
-          <th>{{ total | currency : "$" }}</th>
-        </tr>
-      </tfoot>
-    </table>
-
-    <button
-      class="comprar-btn"
-      (click)="comprarProducto()"
-    >
-      Comprar
+    <button class="busqueda" (click)="buscarCliente()">
+      <img src="./assets/img/busqueda.webp" alt="busqueda" />
     </button>
   </form>
+
+  <table class="table table-striped">
+    <thead class="table-head">
+      <tr>
+        <th id="check">check</th>
+        <th class="producto" id="negrita">Producto</th>
+        <th class="cantidad" id="negrita">Cantidad</th>
+        <th id="negrita">Precio</th>
+        <th id="negrita">Total</th>
+      </tr>
+    </thead>
+    <tbody class="table-body">
+      <tr *ngFor="let producto of productos; index as i">
+        <td id="check">
+          <button class="remove-btn" (click)="rmProduct(i)">
+            <img [src]="closebtn" alt="Eliminar" />
+          </button>
+        </td>
+        <td class="producto">{{ producto.nombre }}</td>
+        <td class="cantidad">
+          <input
+            type="number"
+            [(ngModel)]="producto.cantidad"
+            name="cantidad"
+            (ngModelChange)="actualizarTotal()"
+          />
+        </td>
+        <td>{{ producto.precio | currency : "$" }}</td>
+        <td>{{ producto.cantidad * producto.total | currency : "$" }}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th colspan="4" id="negrita">Total</th>
+        <th>{{ total | currency : "$" }}</th>
+      </tr>
+    </tfoot>
+  </table>
+
+  <button class="comprar-btn" (click)="comprarProducto()">Comprar</button>
 </main>
 
-<app-success-modal *ngIf="showSuccessModal" (closeModal)="cerrarModal()"></app-success-modal>
-
-<!-- <ng-template #successModal class="modal-main" let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title">¡Compra exitosa!</h4>
-    <button type="button" class="btn close" aria-label="Close" (click)="cerrarModal()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body custom-modal-content">
-    <div class="custom-modal-body">
-      <img src="./assets/svg/success.svg" alt="Success">
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="cerrarModal()">Aceptar</button>
-  </div>
-</ng-template> -->
-<!-- <div
-  class="modal fade"
-  id="exampleModalCenter"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">...</div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-          Close
-        </button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div> -->
+<app-success-modal
+  *ngIf="showSuccessModal"
+  (closeModal)="cerrarModal()"
+></app-success-modal>
