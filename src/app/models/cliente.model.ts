@@ -10,4 +10,10 @@ interface GetClienteDTO {
   clientes: Cliente[];
 }
 
-export { Cliente, GetClienteDTO }
+interface CrearClienteDTO extends Omit<Cliente, 'id'> {}
+
+interface NuevoClienteDTO {
+  cliente: Cliente;
+}
+
+export { Cliente, GetClienteDTO, CrearClienteDTO, NuevoClienteDTO };

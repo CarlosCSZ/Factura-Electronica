@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 import { Producto, ProductoDTO } from 'src/app/models/product.model';
 import { StoreService } from 'src/app/services/store.service';
@@ -11,7 +12,6 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class BodyComponent implements OnInit {
   busqueda = '';
-  cantidad = 1;
   filtrados!: string[];
   productos!: ProductoDTO[];
   item: Producto = {
@@ -27,19 +27,17 @@ export class BodyComponent implements OnInit {
   };
   compras: Producto[] = []
   number = 0;
+  showCrearProducto = false;
 
   constructor(
     private storeService: StoreService,
     private apiService: ApiService,
+    private mensaje: ToastrService,
   ) {
     this.compras = this.storeService.myShoppingCart;
   }
   ngOnInit(): void {
-    this.apiService.TraerProductos()
-    .subscribe((data) => {
-      this.productos = data.productos;
-    });
-    this.number = this.compras.length;
+    this.actualizarListaProductos();
   }
 
   filtrarProducto() {
@@ -63,28 +61,44 @@ export class BodyComponent implements OnInit {
       const precio = articulo?.precio;
       this.item.precio = precio;
       this.item.iva = articulo?.iva;
-      this.item.cantidad = this.cantidad;
       this.item.stock = articulo?.stock;
       this.item.total = precio + (precio*this.item.iva/100);
     } else {
+      this.mensaje.error('PRODUCTO NO REGISTRADO');
       this.emptyItem();
     }
   }
 
   agregarNuevoProd() {
-    this.apiService.crearProducto(this.item)//.subscribe()
+    this.showCrearProducto = true;
+  }
+
+  cerrarNuevoProd(mensajeModal: string) {
+    if(mensajeModal === 'SUCCESS') {
+      this.mensaje.success('PRODUCTO REGISTRADO CON EXITO');
+    }
+    if(mensajeModal === 'FAILED') {
+      this.mensaje.error('PRODUCTO NO FUE REGISTRADO');
+    }
+    if(mensajeModal === 'INVALID') {
+      this.mensaje.error('CAMPO/S DEL FORMULARIO INVALDIO/S');
+    }
+    this.showCrearProducto = false;
+    this.actualizarListaProductos();
   }
 
   agregarProdCarrito() {
     let producto: Producto = {...this.item};
     const productoRepetido = this.compras.find((prod) => prod.id === producto.id);
-    if(producto.nombre !== 'No hay Producto' && !productoRepetido) {
+    if(producto.nombre === 'No hay Producto') {
+      this.mensaje.error('ACCION NO VALIDA');
+    } else if (productoRepetido) {
+      this.mensaje.error('PRODUCTO YA FUE AGREGADO');
+    } else {
       this.storeService.addProduct(producto);
       this.number = this.compras.length;
-    } else {
-      alert('ACCION NO VALIDA || PRODUCTO YA REGISTRADO');
+      this.mensaje.success('PRODUCTO AGREGADO');
     }
-    console.log('Carrito end: ', this.storeService.myShoppingCart.length, this.storeService.myShoppingCart)
   }
 
   emptyItem() {
@@ -97,5 +111,13 @@ export class BodyComponent implements OnInit {
     this.item.iva = 0;
     this.item.stock = 0;
     this.item.total = 0;
+  }
+
+  actualizarListaProductos() {
+    this.apiService.TraerProductos()
+    .subscribe((data) => {
+      this.productos = data.productos;
+    });
+    this.number = this.compras.length;
   }
 }

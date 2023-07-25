@@ -16,4 +16,6 @@ interface GetProductoDTO {
   productos: ProductoDTO[]
 }
 
-export { Producto, ProductoDTO, GetProductoDTO }
+interface CrearProductoDTO extends Omit<Producto, 'cantidad'|'id'|'total'> {}
+
+export { Producto, ProductoDTO, GetProductoDTO, CrearProductoDTO }

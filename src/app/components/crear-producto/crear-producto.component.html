@@ -1,0 +1,68 @@
+<div class="modal-backdrop"></div>
+<div class="main grid-container">
+  <div class="modal-header">
+    <h4 class="header-title">Agrega el Nuevo Producto</h4>
+    <button type="button" class="btn close" aria-label="Close" (click)="closeModal.emit()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form class="formulario" [formGroup]="productoForm">
+    <div class="grid-container cabecera">
+      <div class="grid-container titulos">
+        <label for="nombre">Nombre:</label>
+        <label for="descripcion">descripcion:</label>
+        <label for="img">imagen:</label>
+        <label for="precio">precio:</label>
+        <label for="iva">iva:</label>
+        <label for="stock">stock:</label>
+      </div>
+      <div class="grid-container inputs">
+        <input
+          type="text"
+          id="nombre"
+          name="nombre"
+          placeholder="Nombre del producto"
+          formControlName="nombre"
+        />
+        <input
+          type="text"
+          id="descripcion"
+          name="descripcion"
+          placeholder="Descipcion del producto"
+          formControlName="descripcion"
+        />
+        <input
+          type="text"
+          id="img"
+          name="img"
+          placeholder="url de la imagen"
+          formControlName="img"
+        />
+        <input
+          type="number"
+          id="precio"
+          name="precio"
+          placeholder="El precio del producto $$"
+          formControlName="precio"
+        />
+        <input
+          type="number"
+          id="iva"
+          name="iva"
+          placeholder="En caso de no tener iva, escriba 0"
+          formControlName="iva"
+        />
+        <input
+          type="number"
+          id="stock"
+          name="stock"
+          placeholder="Cuanto articulos ingresara"
+          formControlName="stock"
+        />
+      </div>
+    </div>
+  </form>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="agregarProducto()">Agregar</button>
+  </div>
+</div>

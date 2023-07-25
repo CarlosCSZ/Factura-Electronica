@@ -14,7 +14,9 @@ html {
 }
 
 .toast-container .ngx-toastr {
-  top: 150px;
-  right: 160px;
+  top: 60px;
+  right: 5px;
+  margin-left: auto;
+  margin-right: auto;
   font-size: 1.4rem;
 }

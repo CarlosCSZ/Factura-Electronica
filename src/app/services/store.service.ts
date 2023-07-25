@@ -18,10 +18,8 @@ export class StoreService {
   }
 
   addProduct(product: Producto) {
-    console.log('store service: ', this.myShoppingCart.length, this.myShoppingCart);
     this._myShoppingCart.push(product);
     this.myCart.next(this.myShoppingCart);
-    console.log('store service end: ', this.myShoppingCart.length, this.myShoppingCart);
   }
 
   // getShoppingCart() {

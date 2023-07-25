@@ -4,7 +4,7 @@
 
 <main class="factura-list">
   <h4>Facturar a:</h4>
-  <form class="grid-container">
+  <form class="grid-container" [formGroup]="clienteForm">
     <div class="grid-container cabecera">
       <div class="grid-container titulos">
         <label for="nombre">Nombre:</label>
@@ -58,7 +58,7 @@
       <tr *ngFor="let producto of productos; index as i">
         <td id="check">
           <button class="remove-btn" (click)="rmProduct(i)">
-            <img [src]="closebtn" alt="Eliminar" />
+            <img src="./assets/svg/close.svg" alt="Eliminar" />
           </button>
         </td>
         <td class="producto">{{ producto.nombre }}</td>
@@ -88,4 +88,5 @@
 <app-success-modal
   *ngIf="showSuccessModal"
   (closeModal)="cerrarModal()"
+  [cliente]="cliente"
 ></app-success-modal>

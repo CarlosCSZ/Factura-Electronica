@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
 import { Cliente } from 'src/app/models/cliente.model';
@@ -21,7 +22,7 @@ export class FacturaComponent implements OnInit{
     direccion: ''
   };
   total = 0;
-  closebtn = "./assets/svg/close.svg";
+  clienteForm!: FormGroup;
   showSuccessModal = false;
 
   @ViewChild('modalContainer', { read: ViewContainerRef }) successModal!: ViewContainerRef;
@@ -30,7 +31,15 @@ export class FacturaComponent implements OnInit{
     private storeService: StoreService,
     private apiService: ApiService,
     private mensaje: ToastrService,
-  ) {}
+    public form: FormBuilder,
+  ) {
+    this.clienteForm = this.form.group({
+      nombre: ['', [Validators.required]],
+      identificacion: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      celular: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/), ]],
+      ubicacion: ['', [Validators.required]],
+    });
+  }
 
   ngOnInit(): void {
     this.storeService.myCart$.subscribe((compras) => {
@@ -45,7 +54,11 @@ export class FacturaComponent implements OnInit{
   }
 
   comprarProducto() {
-    this.showSuccessModal = true;
+    if(!this.clienteForm.valid) {
+      this.mensaje.error('Llena primero los datos del cliente')
+    } else {
+      this.showSuccessModal = true;
+    }
   }
 
   cerrarModal() {

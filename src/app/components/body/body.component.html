@@ -9,8 +9,7 @@
       list="filtradosLista"
     />
     <datalist id="filtradosLista">
-      <option *ngFor="let nombre of filtrados" [value]="nombre">
-      </option>
+      <option *ngFor="let nombre of filtrados" [value]="nombre"></option>
     </datalist>
 
     <button class="busqueda" (click)="presentarProd()">
@@ -41,8 +40,10 @@
         <h3>{{ item.precio | currency : "$" }}</h3>
         <div class="iva-condition" *ngIf="item.iva > 0">
           <p>+</p>
-          <h3>{{ item.iva/100 | percent }}</h3>
-          <p class="total">=<span>{{item.total | currency: "$"}}</span></p>
+          <h3>{{ item.iva / 100 | percent }}</h3>
+          <p class="total">
+            =<span>{{ item.total | currency : "$" }}</span>
+          </p>
         </div>
         <p>{{ item.descripcion }}</p>
       </div>
@@ -52,3 +53,8 @@
     </div>
   </div>
 </div>
+
+<app-crear-producto
+  *ngIf="showCrearProducto"
+  (closeModal)="cerrarNuevoProd($event)"
+></app-crear-producto>
