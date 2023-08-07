@@ -17,25 +17,25 @@
           type="text"
           id="nombre"
           name="nombre"
-          [(ngModel)]="cliente.nombre"
+          formControlName="nombre"
         />
         <input
           type="text"
           id="identificacion"
           name="identificacion"
-          [(ngModel)]="cliente.cedula"
+          formControlName="identificacion"
         />
         <input
           type="text"
           id="celular"
           name="celular"
-          [(ngModel)]="cliente.celular"
+          formControlName="celular"
         />
         <input
           type="text"
           id="ubicacion"
           name="ubicacion"
-          [(ngModel)]="cliente.direccion"
+          formControlName="ubicacion"
         />
       </div>
     </div>
@@ -88,5 +88,5 @@
 <app-success-modal
   *ngIf="showSuccessModal"
   (closeModal)="cerrarModal()"
-  [cliente]="cliente"
+  [factura]="factura"
 ></app-success-modal>

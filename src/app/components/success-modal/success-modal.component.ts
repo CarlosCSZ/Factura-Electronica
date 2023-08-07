@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Cliente } from 'src/app/models/cliente.model';
+import { Router } from '@angular/router';
+
+import { Factura } from 'src/app/models/factura.model';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -7,26 +9,47 @@ import { ApiService } from 'src/app/services/api.service';
   templateUrl: './success-modal.component.html',
   styleUrls: ['./success-modal.component.css']
 })
-export class SuccessModalComponent implements OnInit{
+export class SuccessModalComponent {
   @Output() closeModal: EventEmitter<void> = new EventEmitter<void>();
-  @Input() cliente!: Cliente;
+  @Input() factura!: Factura;
 
   constructor(
     private apiService: ApiService,
+    private router: Router,
   ) {}
 
-  ngOnInit(): void {
-    if(this.cliente.id === 0) {
-      const { id, ...objCliente } = this.cliente;
-      const nuevoCliente = this.apiService.crearCliente(objCliente)
-      .subscribe(
-        (data) => {
-          this.cliente = data.cliente;
-        },
-        (error) => {
+  async imprimirFactura() {
+    try {
+      if (!this.factura) {
+        return;
+      }
 
-        }
-      )
+      const pdfResponse = <any>await this.apiService.imprimirFactura(this.factura.id);
+      const pdfData = pdfResponse.pdfBuffer.data;
+      const pdfBlob = new Blob([pdfData], { type: 'application/pdf' });
+
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(pdfBlob);
+      link.download = pdfResponse.filename;
+      link.click();
+      link.remove();
+
+      window.focus();
+      await this.waitForFocusChange();
+      this.router.navigate(['home']);
+
+    } catch (error) {
+      console.error('Error al imprimir la factura:', error);
     }
+  }
+
+  private async waitForFocusChange() {
+    return new Promise<void>((resolve) => {
+      const onFocusChange = () => {
+        window.removeEventListener('focus', onFocusChange);
+        resolve();
+      };
+      window.addEventListener('focus', onFocusChange);
+    });
   }
 }

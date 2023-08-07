@@ -10,7 +10,7 @@
 
 html {
   font-size: 62.5%;
-  background-color: aliceblue;
+  background-color: rgb(222, 233, 241);
 }
 
 .toast-container .ngx-toastr {

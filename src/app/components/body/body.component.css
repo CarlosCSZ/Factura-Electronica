@@ -15,17 +15,41 @@
   width: 90%;
   height: 30px;
 }
-#panelBusqueda {
+.panelBusqueda {
+  display: flex;
+  flex-direction: column;
   background-color: rgb(225, 232, 245);
-  float: right;
-  padding: 8px;
-  font-size: 1.4rem;
-  font-weight: 600;
   width: 60%;
 }
-#filtradosLista {
-  width: 90%;
+.panelBusqueda-input {
+  background-color: rgb(225, 232, 245);
+  padding: 3px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  width: 100%;
 }
+.autocomplete-container {
+  position: relative;
+  display: inline-block;
+}
+
+.autocomplete-option {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: black;
+  background-color: white;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.autocomplete-option:hover {
+  background-color: #7a9ebd;
+}
+/* #filtradosLista {
+  font-size: 1.6rem;
+  width: 100%;
+} */
 .carrito {
   display: inline-block;
   left: calc(35% - 100px);

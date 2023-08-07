@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 
 import { Producto, ProductoDTO } from 'src/app/models/product.model';
@@ -10,7 +10,7 @@ import { ApiService } from 'src/app/services/api.service';
   templateUrl: './body.component.html',
   styleUrls: ['./body.component.css'],
 })
-export class BodyComponent implements OnInit {
+export class BodyComponent implements OnInit, OnDestroy {
   busqueda = '';
   filtrados!: string[];
   productos!: ProductoDTO[];
@@ -28,6 +28,7 @@ export class BodyComponent implements OnInit {
   compras: Producto[] = []
   number = 0;
   showCrearProducto = false;
+  showProductoContainer = true;
 
   constructor(
     private storeService: StoreService,
@@ -36,18 +37,36 @@ export class BodyComponent implements OnInit {
   ) {
     this.compras = this.storeService.myShoppingCart;
   }
+
   ngOnInit(): void {
     this.actualizarListaProductos();
+    document.addEventListener('click', this.onClickOutside.bind(this));
+    document.addEventListener('keydown', this.onKeyDown.bind(this));
+  }
+
+  ngOnDestroy(): void {
+    document.removeEventListener('click', this.onClickOutside.bind(this));
+    document.removeEventListener('keydown', this.onKeyDown.bind(this));
   }
 
   filtrarProducto() {
+    this.showProductoContainer = true;
+    if (this.busqueda.trim() === '') {
+      this.filtrados = this.productos.map((item) => item.nombre);
+    } else {
+
+      const busquedaMin = this.busqueda.toLowerCase();
+      this.filtrados = this.productos
+        .filter((item) => item.nombre.toLowerCase().includes(busquedaMin))
+        .map((item) => item.nombre);
+    }
+  }
+
+  seleccionarOpcion(nombre: string) {
+    this.busqueda = nombre;
     this.filtrados = [];
-    this.productos.filter((item) => {
-      const nombre = item.nombre.toLowerCase();
-      if(nombre.includes(this.busqueda)){
-        this.filtrados.push(nombre)
-      }
-    });
+    this.filtrarProducto();
+    this.showProductoContainer = false;
   }
 
   presentarProd() {
@@ -67,6 +86,7 @@ export class BodyComponent implements OnInit {
       this.mensaje.error('PRODUCTO NO REGISTRADO');
       this.emptyItem();
     }
+    this.busqueda = '';
   }
 
   agregarNuevoProd() {
@@ -119,5 +139,25 @@ export class BodyComponent implements OnInit {
       this.productos = data.productos;
     });
     this.number = this.compras.length;
+  }
+
+  onClickOutside(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const productList = document.querySelector('.autocomplete-container') as HTMLElement;
+    const inputDiv = document.querySelector('.panelBusqueda-input') as HTMLElement;
+    if (!this.isDescendant(productList, target) && target !== inputDiv) {
+      this.showProductoContainer = false;
+    }
+  }
+
+  onKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      this.showProductoContainer = false;
+    }
+  }
+
+  isDescendant(parent: HTMLElement | null, child: HTMLElement): boolean {
+    if (!parent) return false;
+    return parent.contains(child);
   }
 }

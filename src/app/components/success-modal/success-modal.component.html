@@ -12,7 +12,11 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="closeModal.emit()">Aceptar</button>
+    <div class="footer-buttons">
+      <button type="button" class="btn btn-success" (click)="closeModal.emit()">Aceptar</button>
+      <button type="button" class="btn btn-primary" (click)="imprimirFactura()">Imprimir facura</button>
+    </div>
+    <p *ngIf="!factura">La factura no está disponible para imprimir.</p>
   </div>
 </div>
 
