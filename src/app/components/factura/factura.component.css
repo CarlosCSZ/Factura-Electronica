@@ -24,6 +24,7 @@ h4 {
   grid-template-columns: minmax(200px, 700px);
   justify-content: center;
   align-items: center;
+  margin: 0 20px;
 }
 
 .grid-container {
@@ -31,7 +32,7 @@ h4 {
 }
 
 .cabecera {
-  grid-template-columns: 110px 400px;
+  grid-template-columns: 110px auto;
   margin: 5px 0 5px 0;
 }
 
@@ -51,14 +52,14 @@ h4 {
   border: 1px solid rgb(202, 194, 194);
   border-radius: 5%;
   cursor: pointer;
-  width: 85%;
+  width: 55%;
   font-size: 1.4rem;
   font-weight: 600;
   padding-left: 5px;
 }
 .busqueda {
   position: absolute;
-  top: calc(17%);
+  top: calc(18%);
   left: calc(60%);
   cursor: pointer;
   border: 2px solid rgb(41, 67, 66);
@@ -158,4 +159,72 @@ h4 {
   height: 25px;
   cursor: pointer;
   margin-left: 20%;
+}
+
+@media screen and (min-width: 700px) and (max-width: 1000px) {
+  .busqueda {
+    top: calc(16.5%);
+    left: calc(65%);
+  }
+}
+@media screen and (min-width: 510px) and (max-width: 700px) {
+  .busqueda {
+    top: calc(16%);
+    left: calc(65%);
+  }
+  .busqueda img {
+    width: 20px;
+  }
+  .check {
+    padding-left: 5px !important;
+  }
+}
+@media screen and (max-width: 510px) {
+  h4 {
+    font-size: medium;
+  }
+  .cabecera {
+    grid-template-columns: 90px auto;
+  }
+  .titulos {
+    font-size: 1.2rem;
+  }
+  .inputs input {
+    width: 70%;
+  }
+  .busqueda {
+    top: calc(15%);
+    left: calc(85%);
+  }
+  .busqueda img {
+    width: 20px;
+  }
+  #negrita {
+    font-size: 1.2rem;
+  }
+  .table td {
+    font-size: 1.1rem;
+    padding-left: 0;
+  }
+  .producto {
+    width: 15opx !important;
+  }
+  .remove-btn {
+    width: 20px;
+    height: 20px;
+  }
+
+  .table button {
+    padding: 0;
+  }
+  .check {
+    padding-left: 5px !important;
+  }
+  #check {
+    width: 6%;
+    padding-left: 0;
+  }
+  #check img {
+    height: 10px;
+  }
 }

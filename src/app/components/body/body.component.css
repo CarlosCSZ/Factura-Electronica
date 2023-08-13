@@ -7,7 +7,7 @@
   justify-content: center;
   align-items: center;
 }
-.barra-busqueda {
+.panel-busqueda {
   display: flex;
   flex-direction: row;
   margin-bottom: 20px;
@@ -15,7 +15,7 @@
   width: 90%;
   height: 30px;
 }
-.panelBusqueda {
+.barraBusqueda {
   display: flex;
   flex-direction: column;
   background-color: rgb(225, 232, 245);
@@ -46,14 +46,12 @@
 .autocomplete-option:hover {
   background-color: #7a9ebd;
 }
-/* #filtradosLista {
-  font-size: 1.6rem;
-  width: 100%;
-} */
+.carrito-container {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
 .carrito {
-  display: inline-block;
-  left: calc(35% - 100px);
-  position: relative;
   font-size: 1.2rem;
   font-weight: 700;
   color: green;
@@ -88,11 +86,11 @@
 .producto {
   padding: 4%;
   overflow: hidden;
-  justify-items: center;
+  margin: auto auto;
 }
 .producto img{
   display: block;
-  width: 60%;
+  width: 70%;
   height: 100%;
   margin: 0 auto;
 }
@@ -148,4 +146,61 @@
   padding: 2%;
   font-weight: 700;
   box-shadow: 1px 3px 5px rgb(67, 98, 86);
+}
+
+
+@media screen and (min-width: 670px) and (max-width: 1060px) {
+  .main-body {
+    width: 90%;
+    padding: 5% 5%;
+  }
+  .panel-info {
+    height: 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
+  .producto {
+    padding: 1%;
+  }
+  .producto img{
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+@media screen and (max-width: 670px) {
+  .main-body {
+    width: 90%;
+    padding: 5% 0;
+  }
+  .panel-info {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 0;
+    border: 1px solid grey;
+    width: 100%;
+    height: auto;
+    justify-content: center;
+  }
+  .producto {
+    padding: 1%;
+  }
+  .producto img{
+    width: 55%;
+  }
+  .panel-busqueda {
+    margin-left: 0;
+  }
+  .barraBusqueda {
+    width: 65%;
+  }
+  .busqueda img {
+    width: 18px;
+    height: 18px;
+    padding: 3% 5%;
+  }
+  .lupa {
+    display: none;
+  }
+  .carrito img{
+    width: 33px;
+  }
 }

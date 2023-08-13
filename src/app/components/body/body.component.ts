@@ -67,6 +67,7 @@ export class BodyComponent implements OnInit, OnDestroy {
     this.filtrados = [];
     this.filtrarProducto();
     this.showProductoContainer = false;
+    if(window.innerWidth <= 670) this.presentarProd();
   }
 
   presentarProd() {

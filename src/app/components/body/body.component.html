@@ -1,7 +1,7 @@
 <div class="main-body">
-  <div class="barra-busqueda">
+  <div class="panel-busqueda">
 
-    <div class="panelBusqueda">
+    <div class="barraBusqueda">
       <input
         type="text"
         class="panelBusqueda-input"
@@ -22,17 +22,19 @@
       </div>
     </div>
 
-    <button class="busqueda" (click)="presentarProd()">
+    <button class="busqueda lupa" (click)="presentarProd()">
       <img src="./assets/img/busqueda.webp" alt="busqueda" />
     </button>
     <button class="busqueda" (click)="agregarNuevoProd()">
       <img src="./assets/svg/plus.svg" alt="busqueda" />
     </button>
-    <div class="carrito">
-      <a routerLink="/facturar">
-        <img src="./assets/img/logo.webp" alt="carrito" />
-      </a>
-      <span>{{ number }}</span>
+    <div class="carrito-container">
+      <div class="carrito">
+        <a routerLink="/facturar">
+          <img src="./assets/img/logo.webp" alt="carrito" />
+        </a>
+        <span>{{ number }}</span>
+      </div>
     </div>
   </div>
   <div class="panel-info">
