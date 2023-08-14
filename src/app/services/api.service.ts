@@ -4,22 +4,24 @@ import { CrearProductoDTO, GetProductoDTO, Producto } from '../models/product.mo
 import { CrearClienteDTO, GetClienteDTO, NuevoClienteDTO } from '../models/cliente.model';
 import { catchError, throwError } from 'rxjs';
 import { CrearFacturaDTO, GetFacturaDTO } from '../models/factura.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
+  baseUrl = environment.API_URL;
 
   constructor(
     private http: HttpClient
   ) { }
 
   TraerProductos() {
-    return this.http.get<GetProductoDTO>('http://localhost:3000/api/productos');
+    return this.http.get<GetProductoDTO>(`${this.baseUrl}/productos`);
   }
 
   crearProducto(producto: CrearProductoDTO) {
-    const nuevoProducto = this.http.post<GetProductoDTO>('http://localhost:3000/api/productos', producto)
+    const nuevoProducto = this.http.post<GetProductoDTO>(`${this.baseUrl}/productos`, producto)
     .pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === HttpStatusCode.InternalServerError) {
@@ -39,7 +41,7 @@ export class ApiService {
   }
 
   traerCLientePorCedula(cedula: string) {
-    const cliente = this.http.get<GetClienteDTO>(`http://localhost:3000/api/clientes?cedula=${cedula}`)
+    const cliente = this.http.get<GetClienteDTO>(`${this.baseUrl}/clientes?cedula=${cedula}`)
     .pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === HttpStatusCode.Conflict) {
@@ -62,7 +64,7 @@ export class ApiService {
   }
 
   crearCliente(cliente: CrearClienteDTO) {
-    const nuevoCliente = this.http.post<NuevoClienteDTO>('http://localhost:3000/api/clientes', cliente)
+    const nuevoCliente = this.http.post<NuevoClienteDTO>(`${this.baseUrl}/clientes`, cliente)
     .pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === HttpStatusCode.InternalServerError) {
@@ -91,7 +93,7 @@ export class ApiService {
       objFactura['productos'].push(producto.id);
       objFactura['cantidad'].push(producto.cantidad);
     }
-    const nuevaFactura = this.http.post<GetFacturaDTO>('http://localhost:3000/api/facturas', objFactura)
+    const nuevaFactura = this.http.post<GetFacturaDTO>(`${this.baseUrl}/facturas`, objFactura)
     .pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === HttpStatusCode.InternalServerError) {
@@ -112,7 +114,7 @@ export class ApiService {
 
   async imprimirFactura(id: number) {
     return new Promise((resolve, reject) => {
-      this.http.get<any>(`http://localhost:3000/api/facturas/${id}/imprimir`)
+      this.http.get<any>(`${this.baseUrl}/facturas/${id}/imprimir`)
       .pipe(
         catchError((error: HttpErrorResponse) => {
           if (error.status === HttpStatusCode.InternalServerError) {
