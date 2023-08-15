@@ -40,7 +40,7 @@
       </div>
     </div>
     <button class="busqueda" (click)="buscarCliente()">
-      <img src="./assets/img/busqueda.webp" alt="busqueda" />
+      <img src="assets/img/busqueda.webp" alt="busqueda" />
     </button>
   </form>
 
@@ -58,7 +58,7 @@
       <tr *ngFor="let producto of productos; index as i">
         <td id="check">
           <button class="remove-btn" (click)="rmProduct(i)">
-            <img src="./assets/svg/close.svg" alt="Eliminar" />
+            <img src="assets/svg/close.svg" alt="Eliminar" />
           </button>
         </td>
         <td class="producto">{{ producto.nombre }}</td>

@@ -8,12 +8,12 @@
   </div>
   <div class="modal-content">
     <div class="custom-modal-body">
-      <img src="./assets/svg/success.svg" alt="Success">
+      <img src="assets/svg/success.svg" alt="Success">
     </div>
   </div>
   <div class="modal-footer">
     <div class="footer-buttons">
-      <button type="button" class="btn btn-success" (click)="closeModal.emit()">Aceptar</button>
+      <button type="button" class="btn btn-success" (click)="irInicio()">Aceptar</button>
       <button type="button" class="btn btn-primary" (click)="imprimirFactura()">Imprimir facura</button>
     </div>
     <p *ngIf="!factura">La factura no está disponible para imprimir.</p>

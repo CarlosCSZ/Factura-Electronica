@@ -18,6 +18,10 @@ export class SuccessModalComponent {
     private router: Router,
   ) {}
 
+  irInicio() {
+    this.router.navigate(['home']);
+  }
+
   async imprimirFactura() {
     try {
       if (!this.factura) {
@@ -35,7 +39,7 @@ export class SuccessModalComponent {
       link.remove();
 
       window.focus();
-      await this.waitForFocusChange();
+      await this.cambiodeFocus();
       this.router.navigate(['home']);
 
     } catch (error) {
@@ -43,7 +47,7 @@ export class SuccessModalComponent {
     }
   }
 
-  private async waitForFocusChange() {
+  private async cambiodeFocus() {
     return new Promise<void>((resolve) => {
       const onFocusChange = () => {
         window.removeEventListener('focus', onFocusChange);

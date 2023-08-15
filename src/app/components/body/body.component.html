@@ -23,15 +23,15 @@
     </div>
 
     <button class="busqueda lupa" (click)="presentarProd()">
-      <img src="./assets/img/busqueda.webp" alt="busqueda" />
+      <img src="assets/img/busqueda.webp" alt="busqueda" />
     </button>
     <button class="busqueda" (click)="agregarNuevoProd()">
-      <img src="./assets/svg/plus.svg" alt="busqueda" />
+      <img src="assets/svg/plus.svg" alt="busqueda" />
     </button>
     <div class="carrito-container">
       <div class="carrito">
         <a routerLink="/facturar">
-          <img src="./assets/img/logo.webp" alt="carrito" />
+          <img src="assets/img/logo.webp" alt="carrito" />
         </a>
         <span>{{ number }}</span>
       </div>
@@ -43,7 +43,7 @@
         <img [src]="item.img" alt="producto" />
       </div>
       <ng-template #default>
-        <img src="./assets/img/noItems.webp" alt="notFound" />
+        <img src="assets/img/noItems.webp" alt="notFound" />
       </ng-template>
     </div>
     <div class="info">
