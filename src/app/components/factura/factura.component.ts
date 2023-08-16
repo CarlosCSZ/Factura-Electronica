@@ -94,7 +94,7 @@ export class FacturaComponent implements OnInit{
       if(!this.formValidity) {
         this.mensaje.error('Llena manualmente los campos')
       } else {
-        if(!this.factura.id) {
+        if(!this.factura) {
           this.apiService.crearFactura(this.cliente.id, this.productos)
           .subscribe(
             (data) => {

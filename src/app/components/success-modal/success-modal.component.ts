@@ -18,8 +18,9 @@ export class SuccessModalComponent {
     private router: Router,
   ) {}
 
-  irInicio() {
-    this.router.navigate(['home']);
+  async irInicio() {
+    await this.router.navigate(['home']);
+    window.location.reload();
   }
 
   async imprimirFactura() {
@@ -29,8 +30,8 @@ export class SuccessModalComponent {
       }
 
       const pdfResponse = <any>await this.apiService.imprimirFactura(this.factura.id);
-      const pdfData = pdfResponse.pdfBuffer.data;
-      const pdfBlob = new Blob([pdfData], { type: 'application/pdf' });
+      const pdfArrayBuffer = new Uint8Array(pdfResponse.pdfBuffer.data);
+      const pdfBlob = new Blob([pdfArrayBuffer], { type: 'application/pdf' });
 
       const link = document.createElement('a');
       link.href = window.URL.createObjectURL(pdfBlob);
@@ -40,7 +41,9 @@ export class SuccessModalComponent {
 
       window.focus();
       await this.cambiodeFocus();
-      this.router.navigate(['home']);
+
+      await this.router.navigate(['home']);
+      window.location.reload();
 
     } catch (error) {
       console.error('Error al imprimir la factura:', error);
