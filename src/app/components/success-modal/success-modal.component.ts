@@ -10,7 +10,7 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./success-modal.component.css']
 })
 export class SuccessModalComponent {
-  @Output() closeModal: EventEmitter<void> = new EventEmitter<void>();
+  @Output() closeModal: EventEmitter<string> = new EventEmitter<string>();
   @Input() factura!: Factura;
 
   constructor(
@@ -19,7 +19,7 @@ export class SuccessModalComponent {
   ) {}
 
   async irInicio() {
-    await this.router.navigate(['home']);
+    await this.router.navigate(['']);
     window.location.reload();
   }
 
@@ -42,11 +42,12 @@ export class SuccessModalComponent {
       window.focus();
       await this.cambiodeFocus();
 
-      await this.router.navigate(['home']);
+      await this.router.navigate(['']);
       window.location.reload();
 
     } catch (error) {
       console.error('Error al imprimir la factura:', error);
+      this.closeModal.emit("Paso un error al imprimir la factura. Intentelo mas tarde")
     }
   }
 

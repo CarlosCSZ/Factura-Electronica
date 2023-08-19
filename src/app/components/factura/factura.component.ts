@@ -113,8 +113,9 @@ export class FacturaComponent implements OnInit{
     }
   }
 
-  cerrarModal() {
+  cerrarModal(msj: string) {
     this.showSuccessModal = false;
+    this.mensaje.error(msj)
   }
 
   actualizarTotal() {

@@ -12,23 +12,26 @@
 .modal-main {
   position: absolute;
   top: 80px;
-  left: calc(50% - 200px);
+  left: calc(50%);
+  transform: translateX(-50%);
   border: 2px solid rgb(166, 154, 154);
   z-index: 1;
 }
 .modal-header {
   background-color: #89bc7c;
-  width: 400px;
+  width: 450px;
   text-align: center;
 }
 .header-title {
-  margin-left: auto;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-left: 15rem;
 }
 .modal-header button {
-  border-radius: 5%;
-  margin-right: 5px;
+  font-weight: 700;
   font-size: 2.2rem;
   font-weight: 700;
+  margin: -1rem 1rem -1rem 0;
 }
 .modal-content {
   display: flex;
@@ -39,7 +42,7 @@
   flex: 1 1 auto;
   padding: 1rem;
   background-color: #578696;
-  width: 400px;
+  width: 450px;
   max-height: 200px;
   text-align: center;
 }
@@ -54,17 +57,63 @@
   position: relative;
   justify-content: center;
   background-color: #909278;
-  width: 400px;
+  width: 450px;
   max-height: 200px;
   text-align: center;
-}
-.modal-footer {
   color: rgb(152, 60, 43);
   font-weight: 700;
 }
-
-.footer-buttons button {
-  width: 115px;
-  justify-content: center;
+.modal-footer p {
   font-size: 1.4rem;
+}
+
+.footer-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-left: 10px;
+}
+.footer-buttons button {
+  width: 130px;
+  justify-content: center;
+  font-size: 1.6rem;
+}
+
+@media screen and (max-width: 500px) {
+  .modal-main {
+    width: 85%;
+  }
+  .modal-header {
+    width: 100%;
+    margin: 0;
+  }
+  .modal-content {
+    width: 100%;
+    margin: 0;
+  }
+  .modal-footer{
+    width: 100%;
+    margin: 0;
+  }
+
+  .header-title {
+    margin-left: calc(50%);
+    transform: translateX(-45%);
+    font-size: 1.6rem;
+  }
+  .footer-buttons {
+    gap: 20px;
+  }
+  .footer-buttons button {
+    font-size: 1.4rem;
+  }
+  .modal-footer p {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width:360px) {
+  .footer-buttons {
+    flex-direction: column-reverse;
+  }
 }

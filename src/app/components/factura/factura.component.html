@@ -87,6 +87,6 @@
 
 <app-success-modal
   *ngIf="showSuccessModal"
-  (closeModal)="cerrarModal()"
+  (closeModal)="cerrarModal($event)"
   [factura]="factura"
 ></app-success-modal>
